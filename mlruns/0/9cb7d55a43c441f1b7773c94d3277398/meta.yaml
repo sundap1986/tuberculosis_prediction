@@ -1,0 +1,16 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/9cb7d55a43c441f1b7773c94d3277398/artifacts
+deleted_time: 1743651523302
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 9cb7d55a43c441f1b7773c94d3277398
+run_name: funny-zebra-377
+run_uuid: 9cb7d55a43c441f1b7773c94d3277398
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743649556965
+status: 1
+tags: []
+user_id: user

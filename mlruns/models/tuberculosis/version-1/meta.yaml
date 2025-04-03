@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1743652878635
+current_stage: None
+description: ''
+last_updated_timestamp: 1743652878635
+name: tuberculosis
+run_id: 3ad6b94369944251afc8a8c1cb877788
+run_link: ''
+source: mlflow-artifacts:/813273227782657870/3ad6b94369944251afc8a8c1cb877788/artifacts/tuberculosis_model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/813273227782657870/3ad6b94369944251afc8a8c1cb877788/artifacts/tuberculosis_model
+user_id: null
+version: 1

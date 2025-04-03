@@ -1,0 +1,16 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/a2d75c31f0e24d45ae85ed2fc72a8703/artifacts
+deleted_time: 1743651523252
+end_time: 1743651426394
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: a2d75c31f0e24d45ae85ed2fc72a8703
+run_name: redolent-dove-852
+run_uuid: a2d75c31f0e24d45ae85ed2fc72a8703
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743651422315
+status: 3
+tags: []
+user_id: user

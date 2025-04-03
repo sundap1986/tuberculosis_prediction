@@ -1,0 +1,4 @@
+test_accuracy: 0.69575
+test_f1: 0.4196415106059083
+test_precision: 0.45664535419197244
+test_recall: 0.4970775107493857

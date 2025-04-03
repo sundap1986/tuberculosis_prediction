@@ -1,0 +1,16 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/04ed4a6b32fa4869b58031515b853ce3/artifacts
+deleted_time: 1743651523286
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 04ed4a6b32fa4869b58031515b853ce3
+run_name: monumental-lark-553
+run_uuid: 04ed4a6b32fa4869b58031515b853ce3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743650114371
+status: 1
+tags: []
+user_id: user

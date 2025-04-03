@@ -1,0 +1,30 @@
+base:
+  random_state: 42
+
+data_load:
+  dataset_path: data/raw/tuberculosis_xray_dataset.csv
+
+featurize:
+  processed_path: data/processed/featured_tb_data.csv
+  categorical_features: ["Gender", "Chest_Pain", "Fever", "Night_Sweats", "Sputum_Production", "Blood_in_Sputum", "Smoking_History", "Previous_TB_History"]
+  numerical_features: ["Age", "Cough_Severity", "Breathlessness", "Fatigue", "Weight_Loss"]
+  target_column: "Class"
+
+data_split:
+  test_size: 0.2
+  trainset_path: data/processed/train_tb.csv
+  testset_path: data/processed/test_tb.csv
+
+train:
+  model_path: models/tuberculosis_model.joblib
+  model_type: RandomForest
+  n_estimators: 100
+  max_depth: null
+  min_samples_split: 2
+  min_samples_leaf: 1
+  random_state: 42
+
+evaluate:
+  metrics_path: reports/metrics.json
+  drift_report_path: reports/data_drift.html
+  system_metrics_path: reports/system_metrics.json

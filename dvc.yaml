@@ -1,0 +1,58 @@
+stages:
+  data_load:
+    cmd: python data_load.py --config params.yaml
+    deps:
+      - data_load.py
+      - params.yaml
+    outs:
+      - data/raw/tuberculosis_xray_dataset.csv
+
+  featurize:
+    cmd: python featurize.py --config params.yaml
+    deps:
+      - featurize.py
+      - data/raw/tuberculosis_xray_dataset.csv
+      - params.yaml
+    outs:
+      - data/processed/featured_tb_data.csv
+
+  data_split:
+    cmd: python data_split.py --config params.yaml
+    deps:
+      - data_split.py
+      - data/processed/featured_tb_data.csv
+      - params.yaml
+    outs:
+      - data/processed/train_tb_data.csv
+      - data/processed/test_tb_data.csv
+
+  train:
+    cmd: python train.py --config params.yaml
+    deps:
+      - train.py
+      - data/processed/train_tb_data.csv
+      - params.yaml
+    outs:
+      - models/tb_model.joblib
+
+  evaluate:
+    cmd: python evaluate.py --config params.yaml
+    deps:
+      - evaluate.py
+      - models/tb_model.joblib
+      - data/processed/test_tb_data.csv
+      - params.yaml
+    metrics:
+      - reports/metrics.json
+
+  data_drift:
+    cmd: python data_drift.py --config=params.yaml
+    deps:
+      - data/processed/train_tb_data.csv
+      - data/processed/test_tb_data.csv
+      - data_drift.py
+    params:
+      - base
+      - evaluate.drift_report_path
+    outs:
+      - reports/data_drift.html

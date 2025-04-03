@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/be481e667df9404ab036ca7741179dde/artifacts
+end_time: 1743652373422
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: be481e667df9404ab036ca7741179dde
+run_name: melodic-hound-984
+run_uuid: be481e667df9404ab036ca7741179dde
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743652367697
+status: 3
+tags: []
+user_id: user

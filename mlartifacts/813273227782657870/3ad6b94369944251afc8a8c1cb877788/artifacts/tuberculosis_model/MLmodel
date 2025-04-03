@@ -1,0 +1,21 @@
+artifact_path: tuberculosis_model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+mlflow_version: 2.21.2
+model_size_bytes: 69745133
+model_uuid: b8083b9d90524382a0647a3557ab5bfd
+prompts: null
+run_id: 3ad6b94369944251afc8a8c1cb877788
+utc_time_created: '2025-04-03 03:57:32.441635'

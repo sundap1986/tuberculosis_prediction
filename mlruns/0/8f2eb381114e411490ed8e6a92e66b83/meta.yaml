@@ -1,0 +1,16 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/8f2eb381114e411490ed8e6a92e66b83/artifacts
+deleted_time: 1743651523269
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 8f2eb381114e411490ed8e6a92e66b83
+run_name: gaudy-zebra-920
+run_uuid: 8f2eb381114e411490ed8e6a92e66b83
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743651161768
+status: 1
+tags: []
+user_id: user

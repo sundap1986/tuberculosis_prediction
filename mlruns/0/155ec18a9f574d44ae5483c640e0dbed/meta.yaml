@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/155ec18a9f574d44ae5483c640e0dbed/artifacts
+end_time: 1743652236204
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 155ec18a9f574d44ae5483c640e0dbed
+run_name: skittish-hare-521
+run_uuid: 155ec18a9f574d44ae5483c640e0dbed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743652231606
+status: 3
+tags: []
+user_id: user

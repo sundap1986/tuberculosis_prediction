@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/813273227782657870/e80645d1192a4b38bc1f43a1a8aa1102/artifacts
+end_time: 1743652870971
+entry_point_name: ''
+experiment_id: '813273227782657870'
+lifecycle_stage: active
+run_id: e80645d1192a4b38bc1f43a1a8aa1102
+run_name: intrigued-shrimp-508
+run_uuid: e80645d1192a4b38bc1f43a1a8aa1102
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743652867036
+status: 3
+tags: []
+user_id: user

@@ -1,0 +1,15 @@
+artifact_uri: file:///D:/My%20Personal/MLOPS/tuberculosis_prediction/mlruns/0/58d08a4a506e4137bad9c34ccac0fda7/artifacts
+end_time: 1743652540187
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 58d08a4a506e4137bad9c34ccac0fda7
+run_name: rebellious-rat-718
+run_uuid: 58d08a4a506e4137bad9c34ccac0fda7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743652530432
+status: 3
+tags: []
+user_id: user

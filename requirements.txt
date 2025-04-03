@@ -1,0 +1,15 @@
+python-dotenv
+scikit-learn
+tensorflow
+evidently
+mlflow
+streamlit
+dvc
+pandas
+numpy
+matplotlib
+skops
+black
+jupyter
+gradio
+-e .
