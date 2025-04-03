@@ -6,7 +6,7 @@ import joblib
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
+from sklearn.model_selection import train_test_split
 def train_model(config_path):
     """Trains a machine learning model on the tuberculosis dataset and logs results to MLflow."""
     # Load Configuration
@@ -24,7 +24,16 @@ def train_model(config_path):
     min_samples_split = config['train']['min_samples_split']
     min_samples_leaf = config['train']['min_samples_leaf']
     random_state = config['base']['random_state']
-
+    # Train and Test split
+    from sklearn.model_selection import train_test_split
+    X = df.drop(columns=['Patient_ID' , 'Class'] , axis=1)
+    y = df["Class"]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=True)
+    # Normalization or Standardization
+    from sklearn.preprocessing import StandardScaler
+    sc = StandardScaler()
+    X_train = sc.fit_transform(X_train)
+    X_test = sc.transform(X_test
     # Initialize Model
     model = RandomForestClassifier(
       n_estimators=n_estimators,
@@ -34,8 +43,7 @@ def train_model(config_path):
       random_state=random_state
      )
 
-    # Train the Model
-    model.fit(X_train, y_train)
+
      
     # Make Predictions on Train Set
     y_train_pred = model.predict(X_train)
