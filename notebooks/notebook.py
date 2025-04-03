@@ -34,24 +34,22 @@ def train_model(config_path):
       random_state=random_state
      )
 
-     # Train the Model
-     model.fit(X_train, y_train)
-       
-     # Make Predictions on Train Set
-     y_train_pred = model.predict(X_train)
+    # Train the Model
+    model.fit(X_train, y_train)
+     
+    # Make Predictions on Train Set
+    y_train_pred = model.predict(X_train)
 
-     # Calculate Metrics
-     train_accuracy = accuracy_score(y_train, y_train_pred)
-     train_precision = precision_score(y_train, y_train_pred, average='macro')
-     train_recall = recall_score(y_train, y_train_pred, average='macro')
-     train_f1 = f1_score(y_train, y_train_pred, average='macro')
+    # Calculate Metrics
+    train_accuracy = accuracy_score(y_train, y_train_pred)
+    train_precision = precision_score(y_train, y_train_pred, average='macro')
+    train_recall = recall_score(y_train, y_train_pred, average='macro')
+    train_f1 = f1_score(y_train, y_train_pred, average='macro')
 
-     # Save Model
-     os.makedirs(os.path.dirname(model_path), exist_ok=True)
-     joblib.dump(model, model_path)
-     print(f"✅ Model saved at: {model_path}")
-
-
+    # Save Model
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
+    joblib.dump(model, model_path)
+    print(f"✅ Model saved at: {model_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
