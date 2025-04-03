@@ -2,34 +2,53 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions: write-all
 
 jobs:
-  build:
+  ci:
+    name: Continuous Integration
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9"
+      - name: Set Up CML
+        uses: iterative/setup-cml@v2
 
       - name: Install Dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+        run: make install
 
-      - name: Run Tests
-        run: |
-          pytest tests/  # Adjust based on your test directory
+      - name: Code Formatting
+        run: make format
 
-      - name: Run Training
-        run: |
-          make train  # Ensure Makefile is properly set
+      - name: Train Model
+        run: make train
+
+      - name: Evaluate Model
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: make eval
+
+      - name: Update Branch with Results
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        run: make update-branch USER_NAME=$USER_NAME USER_EMAIL=$USER_EMAIL
+
+  cd:
+    name: Continuous Deployment
+    needs: ci  # Runs only after CI is successful
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to Hugging Face
+        env:
+          HF: ${{ secrets.HF }}
+        run: make deploy HF=$HF
