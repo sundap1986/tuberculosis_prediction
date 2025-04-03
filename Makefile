@@ -1,83 +1,39 @@
-#################################################################################
-# GLOBALS                                                                       #
-#################################################################################
+install:
+	pip install --upgrade pip &&\
+		pip install -r requirements.txt
 
-PROJECT_NAME = tuberculosis_prediction
-PYTHON_VERSION = 3.10
-PYTHON_INTERPRETER = python
+format:	
+	black *.py 
 
-#################################################################################
-# COMMANDS                                                                      #
-#################################################################################
+train:
+	python train.py
 
-
-## Install Python dependencies
-.PHONY: requirements
-requirements:
-	$(PYTHON_INTERPRETER) -m pip install -U pip
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+eval:
+	echo "## Model Metrics" > report.md
+	cat ./reports/metrics.txt >> report.md
 	
-
-
-
-## Delete all compiled Python files
-.PHONY: clean
-clean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
-
-
-## Lint using flake8, black, and isort (use `make format` to do formatting)
-.PHONY: lint
-lint:
-	flake8 tuberculosis_prediction
-	isort --check --diff tuberculosis_prediction
-	black --check tuberculosis_prediction
-
-## Format source code with black
-.PHONY: format
-format:
-	isort tuberculosis_prediction
-	black tuberculosis_prediction
-
-
-
-
-
-## Set up Python interpreter environment
-.PHONY: create_environment
-create_environment:
-	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	echo '\n## Confusion Matrix Plot' >> report.md
+	echo '![Confusion Matrix](./reports/confusion_matrix.png)' >> report.md
 	
+	cml comment create report.md
+		
+update-branch:
+	git config --global user.name $(USER_NAME)
+	git config --global user.email $(USER_EMAIL)
+	git commit -am "Update with new results"
+	git push --force origin HEAD:update
 
+hf-login: 
+	pip install -U "huggingface_hub[cli]"
+	git pull origin update
+	git switch update
+	huggingface-cli login --token $(HF) --add-to-git-credential
 
+push-hub: 
+	huggingface-cli upload sundararao/drug-classification ./ --repo-type=space --commit-message="Sync App files"
+	huggingface-cli upload sundararao/drug-classification ./models /models --repo-type=space --commit-message="Sync Model"
+	huggingface-cli upload sundararao/drug-classification ./reports /Metrics --repo-type=space --commit-message="Sync Model"
 
-#################################################################################
-# PROJECT RULES                                                                 #
-#################################################################################
+deploy: hf-login push-hub
 
-
-## Make dataset
-.PHONY: data
-data: requirements
-	$(PYTHON_INTERPRETER) tuberculosis_prediction/dataset.py
-
-
-#################################################################################
-# Self Documenting Commands                                                     #
-#################################################################################
-
-.DEFAULT_GOAL := help
-
-define PRINT_HELP_PYSCRIPT
-import re, sys; \
-lines = '\n'.join([line for line in sys.stdin]); \
-matches = re.findall(r'\n## (.*)\n[\s\S]+?\n([a-zA-Z_-]+):', lines); \
-print('Available rules:\n'); \
-print('\n'.join(['{:25}{}'.format(*reversed(match)) for match in matches]))
-endef
-export PRINT_HELP_PYSCRIPT
-
-help:
-	@$(PYTHON_INTERPRETER) -c "${PRINT_HELP_PYSCRIPT}" < $(MAKEFILE_LIST)
+all: install format train eval update-branch deploy
