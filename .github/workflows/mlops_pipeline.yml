@@ -1,20 +1,17 @@
-name: MLOps Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
-      - develop
   pull_request:
     branches:
       - main
-      - develop
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -29,30 +26,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Code Formatting Check (Black)
-        run: black --check *.py
-
-      - name: Train Model
-        run: make train
-
-      - name: Evaluate Model
-        run: make eval
-
-      - name: Upload Reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: model-reports
-          path: reports/
-
-      - name: Log in to Hugging Face (if enabled)
-        if: env.HF_TOKEN != ''
+      - name: Run Tests
         run: |
-          pip install -U "huggingface_hub[cli]"
-          huggingface-cli login --token ${{ secrets.HF_TOKEN }}
+          pytest tests/  # Adjust based on your test directory
 
-      - name: Push Model to Hugging Face (if enabled)
-        if: env.HF_TOKEN != ''
-        run: make push-hub
-
-      - name: Deploy Model
-        run: make deploy
+      - name: Run Training
+        run: |
+          make train  # Ensure Makefile is properly set
