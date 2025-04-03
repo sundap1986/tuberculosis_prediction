@@ -6,7 +6,7 @@ format:
 	black *.py 
 
 train:
-	python /notebooks/notebook.py
+	python ./notebooks/notebook.py
 
 eval:
 	echo "## Model Metrics" > report.md
